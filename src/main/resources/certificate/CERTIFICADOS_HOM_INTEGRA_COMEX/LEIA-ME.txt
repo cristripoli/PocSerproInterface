@@ -1,0 +1,6 @@
+Os certificados digitais e-CPF disponibilizados são compatíveis somente com o ambiente de validação. 
+Não possuem valor em ambiente produtivos do Integra Comex e nem de qualquer outro sistema.
+Os numeros dos CPF e CNPJ contidos na planilha "Massa de dados" foram selecionados de forma aleatória com o objetivo 
+facilitar o entendimento da integração e consumo dos serviços.
+Com base nos direcionamento de segurança do Serpro, as informações vinculadas ao CPF/CNPJ carregados em ambiente de validação são
+mascarados. Para maiores informações, favor enviar e-mail para: css.serpro@serpro.gov.br com o assunto: INTEGRA COMEX.

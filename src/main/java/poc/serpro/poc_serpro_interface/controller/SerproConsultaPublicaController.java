@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poc.serpro.poc_serpro_interface.service.RequestParameter;
 import poc.serpro.poc_serpro_interface.service.SerproConsultaPublicaService;
 
 @RestController
@@ -20,6 +21,8 @@ public class SerproConsultaPublicaController {
 	
 	@RequestMapping("escalaMaritima")
 	public void escalaMaritima() {
-		serproService.buildRequest();
+//		serproService.buildRequest();
+		serproService.buildOAuthRequest();
+//		serproService.obtainSecuredResource();
 	}
 }
