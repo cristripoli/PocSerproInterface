@@ -16,8 +16,13 @@ public class PrivateQueryController {
 	private PrivateQueryService serproService;
 
 
-	@GetMapping("/escalas/{numeroEscala}")
-	public String escalaMaritima(@PathVariable Long numeroEscala) {
-		return serproService.privateQuery("/escalas/" + numeroEscala);
+	@GetMapping("/escalas/{scaleNumber}")
+	public String getSeaScale(@PathVariable Long scaleNumber) {
+		return serproService.privateQuery("/escalas/" + scaleNumber);
+	}
+	
+	@GetMapping("/manifestos/{manifestNumber}")
+	public String getManifest(@PathVariable Long manifestNumber) {
+		return serproService.privateQuery("/manifestos/" + manifestNumber);
 	}
 }
