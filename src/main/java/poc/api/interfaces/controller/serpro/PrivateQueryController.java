@@ -25,4 +25,9 @@ public class PrivateQueryController {
 	public String getManifest(@PathVariable Long manifestNumber) {
 		return serproService.privateQuery("/manifestos/" + manifestNumber);
 	}
+	
+	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}")
+	public String getBillOfLading(@PathVariable Long billOfLadingNumber) {
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber);
+	}
 }
