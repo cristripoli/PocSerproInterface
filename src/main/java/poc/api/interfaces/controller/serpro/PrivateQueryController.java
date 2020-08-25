@@ -30,4 +30,10 @@ public class PrivateQueryController {
 	public String getBillOfLading(@PathVariable Long billOfLadingNumber) {
 		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber);
 	}
+	
+	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}/itens/{itemNumber}")
+	public String getBillOfLadingItems(@PathVariable Long billOfLadingNumber, @PathVariable String itemNumber) {
+		System.out.println("itemNumber: " + itemNumber);
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber + "/itens/" + itemNumber);
+	}
 }
