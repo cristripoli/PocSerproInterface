@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 import poc.serpro.poc_serpro_interface.service.RequestParameter;
 
+@Service
 public abstract class GeneralHeaderImpl implements IGeneralHeader {
 
 	@Override

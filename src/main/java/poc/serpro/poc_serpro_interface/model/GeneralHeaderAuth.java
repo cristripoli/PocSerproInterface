@@ -28,7 +28,7 @@ public abstract class GeneralHeaderAuth extends GeneralHeaderImpl {
 
 	private String generateAuthorizationParam() {
 		String auth = getUsername() + ":" + getPassword();
-		byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("US-ASCII")));
+		byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(Charset.forName("ISO-8859-1")));
 		return "Basic " + new String(encodedAuth);
 	}
 	

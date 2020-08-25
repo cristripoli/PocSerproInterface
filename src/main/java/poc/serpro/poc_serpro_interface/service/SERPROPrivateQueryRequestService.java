@@ -1,36 +1,34 @@
 package poc.serpro.poc_serpro_interface.service;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.ssl.SSLContextBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.stereotype.Service;
 
-import poc.serpro.poc_serpro_interface.enums.KeyStoreTypeEnum;
 import poc.serpro.poc_serpro_interface.model.AuthResponse;
+import poc.serpro.poc_serpro_interface.model.IGeneralHeader;
+import poc.serpro.poc_serpro_interface.model.IGeneralRequest;
 import poc.serpro.poc_serpro_interface.model.RequestBuilder;
 
-public abstract class SERPROPrivateQueryRequestService {
+@Service
+public class SERPROPrivateQueryRequestService {
 
 	@Autowired
 	private SerproAuthService serproAuthService;
+	
+	@Autowired
+	@Qualifier("SERPROPrivateQueryHeader")
+	private IGeneralHeader privateQueryHeader;
+	
+	@Autowired
+	@Qualifier("SERPROPrivateQueryRequest")
+	private IGeneralRequest privateQueryRequest;
 	
 	@Autowired
 	private RequestBuilder builder;
@@ -39,11 +37,17 @@ public abstract class SERPROPrivateQueryRequestService {
 	private String baseUrl;
 
 	public String privateQuery(String resource) {
-		AuthResponse authResponse = serproAuthService.getAuthentication();
+		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();
 		
-		builder.b
 		String completeURL = this.baseUrl + resource;
-		ResponseEntity<String>  response = builder.executeRequest(completeURL, HttpMethod.GET, String.class);
+		ResponseEntity<String>  response = builder.executeRequest(completeURL, HttpMethod.GET, String.class, privateQueryHeader.buildHeader(createHeader(authResponse.getBody())));
 		return response.getBody();
+	}
+	
+	public List<RequestParameter> createHeader(AuthResponse resp) {
+		List<RequestParameter> params = new ArrayList<RequestParameter>();
+		params.add(new RequestParameter(HttpHeaders.AUTHORIZATION, resp.getToken_type() + " " + resp.getAccess_token()));
+		params.add(new RequestParameter("jwt_token", resp.getJwt_token()));
+		return params;
 	}
 }

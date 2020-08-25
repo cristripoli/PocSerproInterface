@@ -11,5 +11,4 @@ public class PocSerproInterfaceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PocSerproInterfaceApplication.class, args);
 	}
-
 }

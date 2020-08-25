@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 
 import poc.serpro.poc_serpro_interface.service.RequestParameter;
 
+@Component("HeaderAuthSERPRO")
 public class HeaderAuthSERPRO extends GeneralHeaderAuth {
 	
-	@Value("{client.registration.client-id}")
+	@Value("${client.registration.client-id}")
 	private String username;
 	
-	@Value("{client.registration.client-secret}")
+	@Value("${client.registration.client-secret}")
 	private String password;
 	
 	@Override
 	public MultiValueMap<String, String> buildHeader(List<RequestParameter> headerParams) {
-		List<RequestParameter> params = new ArrayList<RequestParameter>();
 		
 		if(headerParams == null){
 			headerParams = new ArrayList<RequestParameter>();
@@ -26,7 +27,7 @@ public class HeaderAuthSERPRO extends GeneralHeaderAuth {
 		
 		headerParams.add(new RequestParameter("Role-Type", "IMPEXP"));
 		
-		return super.buildHeader(params);
+		return super.buildHeader(headerParams);
 	}
 
 	@Override
