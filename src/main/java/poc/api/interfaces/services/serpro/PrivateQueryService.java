@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import poc.api.interfaces.contracts.IGeneralHeader;
 import poc.api.interfaces.contracts.IGeneralRequest;
 import poc.api.interfaces.entities.serpro.PrivateQueryGenericResponse;
+import poc.api.interfaces.entities.serpro.PrivateQuerySeaScaleResponse;
 import poc.api.interfaces.model.RequestParameter;
 import poc.api.interfaces.model.serpro.AuthResponse;
+import poc.api.interfaces.repository.IPrivateQueryManifestResponseRepository;
 import poc.api.interfaces.repository.IPrivateQueryResponseRepository;
 import poc.api.interfaces.services.RequestBuilder;
 
@@ -38,7 +40,7 @@ public class PrivateQueryService {
 	@Autowired
 	private RequestBuilder builder;
 
-	public PrivateQueryGenericResponse privateQuery(String resource) {
+	public <T extends PrivateQueryGenericResponse> T privateQuery  (String resource) {
 		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();
 
 		String completeURL = privateQueryRequest.getBaseURL() + resource;
@@ -50,7 +52,7 @@ public class PrivateQueryService {
 		
 		privateQueryResponseRepository.save(queryGenericResponse);
 		
-		return queryGenericResponse;
+		return (T) queryGenericResponse;
 	}
 
 	public List<RequestParameter> createHeader(AuthResponse resp) {
