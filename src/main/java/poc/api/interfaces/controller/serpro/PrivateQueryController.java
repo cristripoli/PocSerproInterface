@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import poc.api.interfaces.services.serpro.PrivateQueryService;
+import poc.api.interfaces.services.serpro.PublicQueryService;
 
 @RestController
 @RequestMapping("v1/serpro/consulta-restrita")

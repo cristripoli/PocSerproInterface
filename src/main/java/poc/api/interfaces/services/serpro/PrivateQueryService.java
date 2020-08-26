@@ -34,13 +34,10 @@ public class PrivateQueryService {
 	@Autowired
 	private RequestBuilder builder;
 	
-	@Value("${client.serpro.base-url.integra-comex}")
-	private String baseUrl;
-
 	public String privateQuery(String resource) {
 		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();
 		
-		String completeURL = this.baseUrl + resource;
+		String completeURL = privateQueryRequest.getBaseURL() + resource;
 		ResponseEntity<String>  response = builder.executeRequest(completeURL, HttpMethod.GET, String.class, privateQueryHeader.buildHeader(createHeader(authResponse.getBody())));
 		return response.getBody();
 	}
