@@ -18,22 +18,22 @@ public class PrivateQueryController {
 
 	@GetMapping("/escalas/{scaleNumber}")
 	public String getSeaScale(@PathVariable Long scaleNumber) {
-		return serproService.privateQuery("/escalas/" + scaleNumber);
+		return serproService.privateQuery("/escalas/" + scaleNumber).toString();
 	}
 	
 	@GetMapping("/manifestos/{manifestNumber}")
 	public String getManifest(@PathVariable Long manifestNumber) {
-		return serproService.privateQuery("/manifestos/" + manifestNumber);
+		return serproService.privateQuery("/manifestos/" + manifestNumber).toString();
 	}
 	
 	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}")
 	public String getBillOfLading(@PathVariable Long billOfLadingNumber) {
-		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber);
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber).toString();
 	}
 	
 	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}/itens/{itemNumber}")
 	public String getBillOfLadingItems(@PathVariable Long billOfLadingNumber, @PathVariable String itemNumber) {
 		System.out.println("itemNumber: " + itemNumber);
-		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber + "/itens/" + itemNumber);
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber + "/itens/" + itemNumber).toString();
 	}
 }

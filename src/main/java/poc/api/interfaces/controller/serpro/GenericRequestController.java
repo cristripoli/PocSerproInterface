@@ -26,7 +26,7 @@ public class GenericRequestController {
 
 	@GetMapping("/makePublicRequest")
 	public String makePublicRequest(@PathVariable String resource) {
-		return serproPrivateService.privateQuery(resource);
+		return serproPrivateService.privateQuery(resource).toString();
 	}
 	
 	@GetMapping("/makePrivateRequest")

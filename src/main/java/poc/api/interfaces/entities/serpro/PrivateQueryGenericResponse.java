@@ -1,6 +1,6 @@
 package poc.api.interfaces.entities.serpro;
 
-import java.util.Date;
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +12,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class PublicQueryResponse {
+public class PrivateQueryGenericResponse implements Serializable{
+
+	private static final long serialVersionUID = 559290256006804537L;
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Long numero;
-	private Date dataAtualizacao;
 }
