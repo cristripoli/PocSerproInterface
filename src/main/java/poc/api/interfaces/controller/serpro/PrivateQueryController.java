@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingItemResponse;
+import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingResponse;
 import poc.api.interfaces.entities.serpro.PrivateQueryGenericResponse;
+import poc.api.interfaces.entities.serpro.PrivateQueryManifestResponse;
 import poc.api.interfaces.entities.serpro.PrivateQuerySeaScaleResponse;
 import poc.api.interfaces.services.serpro.PrivateQueryService;
 
@@ -20,22 +23,22 @@ public class PrivateQueryController {
 
 	@GetMapping("/escalas/{scaleNumber}")
 	public PrivateQuerySeaScaleResponse getSeaScale(@PathVariable Long scaleNumber) {
-		return serproService.privateQuery("/escalas/" + scaleNumber);
+		return serproService.privateQuery("/escalas/" + scaleNumber, PrivateQuerySeaScaleResponse.class);
 	}
 	
 	@GetMapping("/manifestos/{manifestNumber}")
-	public PrivateQueryGenericResponse getManifest(@PathVariable Long manifestNumber) {
-		return serproService.privateQuery("/manifestos/" + manifestNumber);
+	public PrivateQueryManifestResponse getManifest(@PathVariable Long manifestNumber) {
+		return serproService.privateQuery("/manifestos/" + manifestNumber, PrivateQueryManifestResponse.class);
 	}
 	
 	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}")
-	public PrivateQueryGenericResponse getBillOfLading(@PathVariable Long billOfLadingNumber) {
-		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber);
+	public PrivateQueryBillOfLadingResponse getBillOfLading(@PathVariable Long billOfLadingNumber) {
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber, PrivateQueryBillOfLadingResponse.class);
+		
 	}
 	
 	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}/itens/{itemNumber}")
-	public PrivateQueryGenericResponse getBillOfLadingItems(@PathVariable Long billOfLadingNumber, @PathVariable String itemNumber) {
-		System.out.println("itemNumber: " + itemNumber);
-		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber + "/itens/" + itemNumber);
+	public PrivateQueryBillOfLadingItemResponse getBillOfLadingItems(@PathVariable Long billOfLadingNumber, @PathVariable String itemNumber) {
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber + "/itens/" + itemNumber, PrivateQueryBillOfLadingItemResponse.class);
 	}
 }

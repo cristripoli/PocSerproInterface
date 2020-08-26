@@ -24,14 +24,14 @@ public class GenericRequestController {
 	private PublicQueryService serproPublicService;
 
 
-	@GetMapping("/makePublicRequest")
-	public String makePublicRequest(@PathVariable String resource) {
-		return serproPrivateService.privateQuery(resource).toString();
-	}
-	
-	@GetMapping("/makePrivateRequest")
-	public List<PublicQueryResponse> makePrivateRequest(@RequestParam List<String> nr) {
-		String queryParameters = String.join("&nr=", nr);
-		return serproPublicService.publicQuery(queryParameters);
-	}
+//	@GetMapping("/makePublicRequest")
+//	public String makePublicRequest(@PathVariable String resource) {
+//		return serproPrivateService.privateQuery(resource, String.class);
+//	}
+//	
+//	@GetMapping("/makePrivateRequest")
+//	public List<PublicQueryResponse> makePrivateRequest(@RequestParam List<String> nr) {
+//		String queryParameters = String.join("&nr=", nr);
+//		return serproPublicService.publicQuery(queryParameters);
+//	}
 }

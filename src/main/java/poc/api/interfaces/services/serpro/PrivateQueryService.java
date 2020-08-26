@@ -40,19 +40,19 @@ public class PrivateQueryService {
 	@Autowired
 	private RequestBuilder builder;
 
-	public <T extends PrivateQueryGenericResponse> T privateQuery  (String resource) {
+	public <T extends PrivateQueryGenericResponse> T privateQuery(String resource, Class<T> type) {
 		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();
 
 		String completeURL = privateQueryRequest.getBaseURL() + resource;
-		ResponseEntity<PrivateQueryGenericResponse> response = builder.executeRequest(completeURL, HttpMethod.GET,
-				PrivateQueryGenericResponse.class,
+		ResponseEntity<T> response = builder.executeRequest(completeURL, HttpMethod.GET,
+				type,
 				privateQueryHeader.buildHeader(createHeader(authResponse.getBody())));
 		
-		PrivateQueryGenericResponse queryGenericResponse = response.getBody();
+		T queryGenericResponse = response.getBody();
 		
 		privateQueryResponseRepository.save(queryGenericResponse);
 		
-		return (T) queryGenericResponse;
+		return queryGenericResponse;
 	}
 
 	public List<RequestParameter> createHeader(AuthResponse resp) {
