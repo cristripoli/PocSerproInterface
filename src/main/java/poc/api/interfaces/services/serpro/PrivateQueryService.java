@@ -44,8 +44,8 @@ public class PrivateQueryService {
 	
 	public List<RequestParameter> createHeader(AuthResponse resp) {
 		List<RequestParameter> params = new ArrayList<RequestParameter>();
-		params.add(new RequestParameter(HttpHeaders.AUTHORIZATION, resp.getToken_type() + " " + resp.getAccess_token()));
-		params.add(new RequestParameter("jwt_token", resp.getJwt_token()));
+		params.add(new RequestParameter(HttpHeaders.AUTHORIZATION, resp.getTokenType() + " " + resp.getAccessToken()));
+		params.add(new RequestParameter("jwt_token", resp.getAccessToken()));
 		return params;
 	}
 }

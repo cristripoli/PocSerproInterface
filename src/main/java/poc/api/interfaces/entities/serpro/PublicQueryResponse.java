@@ -1,4 +1,4 @@
-package poc.api.interfaces.model.serpro;
+package poc.api.interfaces.entities.serpro;
 
 import java.util.Date;
 

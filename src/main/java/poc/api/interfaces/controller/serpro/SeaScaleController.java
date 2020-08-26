@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import poc.api.interfaces.controller.dto.serpro.PublicQueryResponseDto;
-import poc.api.interfaces.model.serpro.PublicQueryResponse;
+import poc.api.interfaces.dto.serpro.PublicQueryResponseDto;
+import poc.api.interfaces.entities.serpro.PublicQueryResponse;
 import poc.api.interfaces.repository.IPublicQueryResponseRepository;
 
 @RestController
