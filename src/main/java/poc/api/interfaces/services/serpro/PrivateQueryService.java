@@ -24,7 +24,7 @@ import poc.api.interfaces.repository.IPrivateQueryBillOfLadingResponseRepository
 import poc.api.interfaces.repository.IPrivateQueryManifestResponseRepository;
 import poc.api.interfaces.repository.IPrivateQueryResponseRepository;
 import poc.api.interfaces.repository.IPrivateQuerySeaScaleResponseRepository;
-import poc.api.interfaces.services.RequestBuilder;
+import poc.api.interfaces.services.RequestService;
 
 @Service
 public class PrivateQueryService {
@@ -56,7 +56,7 @@ public class PrivateQueryService {
 	private IGeneralRequest privateQueryRequest;
 	
 	@Autowired
-	private RequestBuilder builder;
+	private RequestService builder;
 
 	public <T extends PrivateQueryGenericResponse> T privateQuery(String resource, Class<T> type) {
 		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();

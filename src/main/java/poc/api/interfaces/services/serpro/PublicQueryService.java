@@ -13,7 +13,7 @@ import poc.api.interfaces.contracts.IGeneralHeader;
 import poc.api.interfaces.contracts.IGeneralRequest;
 import poc.api.interfaces.entities.serpro.PublicQueryResponse;
 import poc.api.interfaces.repository.IPublicQueryResponseRepository;
-import poc.api.interfaces.services.RequestBuilder;
+import poc.api.interfaces.services.RequestService;
 
 @Service
 public class PublicQueryService {
@@ -27,7 +27,7 @@ public class PublicQueryService {
 	private IGeneralRequest publicQueryRequest;
 
 	@Autowired
-	private RequestBuilder builder;
+	private RequestService builder;
 
 	@Autowired
 	private IPublicQueryResponseRepository publicQueryResponseRepository;

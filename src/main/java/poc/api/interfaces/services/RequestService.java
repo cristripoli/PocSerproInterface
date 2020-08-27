@@ -10,7 +10,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Service
-public class RequestBuilder {
+public class RequestService {
 	
 	@Autowired
 	private RestTemplate restTemplate;
