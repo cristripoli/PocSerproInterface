@@ -1,4 +1,4 @@
-package poc.serpro.poc_serpro_interface;
+package poc.api.interfaces.tests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
