@@ -23,7 +23,7 @@ public class PrivateQueryGenericResponse implements Serializable{
 
 	private static final long serialVersionUID = 559290256006804537L;
 
-	@Id @GeneratedValue(strategy = GenerationType.TABLE)
+	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private Long numero;
 }

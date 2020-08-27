@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingItemResponse;
 import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingResponse;
-import poc.api.interfaces.entities.serpro.PrivateQueryGenericResponse;
 import poc.api.interfaces.entities.serpro.PrivateQueryManifestResponse;
 import poc.api.interfaces.entities.serpro.PrivateQuerySeaScaleResponse;
 import poc.api.interfaces.services.serpro.PrivateQueryService;
