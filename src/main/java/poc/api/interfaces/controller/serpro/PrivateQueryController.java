@@ -1,27 +1,41 @@
 package poc.api.interfaces.controller.serpro;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import poc.api.interfaces.entities.serpro.*;
 import poc.api.interfaces.services.serpro.PrivateQueryService;
 
 @RestController
-@RequestMapping("serpro/private")
+@RequestMapping("v1/serpro/consulta-restrita")
 public class PrivateQueryController {
 	
 	@Autowired
 	private PrivateQueryService serproService;
 
-	@RequestMapping("hello")
-	public String hello() {
-		return "Hello Serpro Private";
+
+	@GetMapping("/escalas/{scaleNumber}")
+	public Response getSeaScale(@PathVariable Long scaleNumber) {
+//		return serproService.privateQuery("/escalas/" + scaleNumber, PrivateQuerySeaScaleResponse.class);
+		return serproService.privateQueryAsString("/escalas/" + scaleNumber);
 	}
 	
-	@RequestMapping("escalaMaritima")
-	public void escalaMaritima() {
-//		serproService.buildRequest();
-		System.out.println(serproService.privateQuery("/escalas/18000009140"));
-//		serproService.obtainSecuredResource();
+	@GetMapping("/manifestos/{manifestNumber}")
+	public PrivateQueryManifestResponse getManifest(@PathVariable Long manifestNumber) {
+		return serproService.privateQuery("/manifestos/" + manifestNumber, PrivateQueryManifestResponse.class);
+	}
+	
+	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}")
+	public PrivateQueryBillOfLadingResponse getBillOfLading(@PathVariable Long billOfLadingNumber) {
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber, PrivateQueryBillOfLadingResponse.class);
+		
+	}
+	
+	@GetMapping("/conhecimentos-embarque/{billOfLadingNumber}/itens/{itemNumber}")
+	public PrivateQueryBillOfLadingItemResponse getBillOfLadingItems(@PathVariable Long billOfLadingNumber, @PathVariable String itemNumber) {
+		return serproService.privateQuery("/conhecimentos-embarque/" + billOfLadingNumber + "/itens/" + itemNumber, PrivateQueryBillOfLadingItemResponse.class);
 	}
 }

@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import poc.api.interfaces.contracts.IGeneralHeader;
 import poc.api.interfaces.contracts.IGeneralRequest;
 import poc.api.interfaces.model.serpro.AuthResponse;
-import poc.api.interfaces.services.RequestBuilder;
+import poc.api.interfaces.services.RequestService;
 
 @Service
 public class AuthenticationService {
 
 	@Autowired
-	private RequestBuilder builder;
+	private RequestService builder;
 	
 	@Autowired
 	@Qualifier("AuthHeader")

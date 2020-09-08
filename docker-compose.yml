@@ -1,0 +1,9 @@
+version: '3'
+services:
+  database:
+    image: 'mongo'
+    container_name: 'api_mongo'
+    volumes:
+     - ./data/db:/usr/src/data/db
+    ports:
+      - 27017:27017

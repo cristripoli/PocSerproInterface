@@ -16,7 +16,7 @@ public abstract class GeneralHeaderAuth extends GeneralHeaderImpl {
 	public MultiValueMap<String, String> buildHeader(List<RequestParameter> headerParams) {
 	
 		if(headerParams == null){
-			headerParams = new ArrayList<RequestParameter>();
+			headerParams = new ArrayList<>();
 		}
 		
 		String authParam = generateAuthorizationParam();

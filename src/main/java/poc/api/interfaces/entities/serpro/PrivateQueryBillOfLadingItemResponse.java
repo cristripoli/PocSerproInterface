@@ -1,0 +1,21 @@
+package poc.api.interfaces.entities.serpro;
+
+import javax.persistence.Entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+public class PrivateQueryBillOfLadingItemResponse extends PrivateQueryGenericResponse {
+
+	private static final long serialVersionUID = -7327269605923798595L;
+	
+	private int qtdTotalItens;
+	private int qtdItensRecebidos;
+}
