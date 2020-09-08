@@ -16,7 +16,7 @@ public abstract class GeneralHeaderImpl implements IGeneralHeader {
 
 	@Override
 	public MultiValueMap<String, String> buildHeader(List<RequestParameter> headerParams) {
-		MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+		MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
 		headers.set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
 		for(RequestParameter param : headerParams) {

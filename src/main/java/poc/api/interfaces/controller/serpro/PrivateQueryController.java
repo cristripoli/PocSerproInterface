@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingItemResponse;
-import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingResponse;
-import poc.api.interfaces.entities.serpro.PrivateQueryManifestResponse;
-import poc.api.interfaces.entities.serpro.PrivateQuerySeaScaleResponse;
+import poc.api.interfaces.entities.serpro.*;
 import poc.api.interfaces.services.serpro.PrivateQueryService;
 
 @RestController
@@ -21,8 +18,9 @@ public class PrivateQueryController {
 
 
 	@GetMapping("/escalas/{scaleNumber}")
-	public PrivateQuerySeaScaleResponse getSeaScale(@PathVariable Long scaleNumber) {
-		return serproService.privateQuery("/escalas/" + scaleNumber, PrivateQuerySeaScaleResponse.class);
+	public Response getSeaScale(@PathVariable Long scaleNumber) {
+//		return serproService.privateQuery("/escalas/" + scaleNumber, PrivateQuerySeaScaleResponse.class);
+		return serproService.privateQueryAsString("/escalas/" + scaleNumber);
 	}
 	
 	@GetMapping("/manifestos/{manifestNumber}")

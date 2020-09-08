@@ -12,18 +12,10 @@ import org.springframework.stereotype.Service;
 
 import poc.api.interfaces.contracts.IGeneralHeader;
 import poc.api.interfaces.contracts.IGeneralRequest;
-import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingItemResponse;
-import poc.api.interfaces.entities.serpro.PrivateQueryBillOfLadingResponse;
-import poc.api.interfaces.entities.serpro.PrivateQueryGenericResponse;
-import poc.api.interfaces.entities.serpro.PrivateQueryManifestResponse;
-import poc.api.interfaces.entities.serpro.PrivateQuerySeaScaleResponse;
+import poc.api.interfaces.entities.serpro.*;
 import poc.api.interfaces.model.RequestParameter;
 import poc.api.interfaces.model.serpro.AuthResponse;
-import poc.api.interfaces.repository.IPrivateQueryBillOfLadingItemResponseRepository;
-import poc.api.interfaces.repository.IPrivateQueryBillOfLadingResponseRepository;
-import poc.api.interfaces.repository.IPrivateQueryManifestResponseRepository;
-import poc.api.interfaces.repository.IPrivateQueryResponseRepository;
-import poc.api.interfaces.repository.IPrivateQuerySeaScaleResponseRepository;
+import poc.api.interfaces.repository.*;
 import poc.api.interfaces.services.RequestService;
 
 @Service
@@ -54,15 +46,18 @@ public class PrivateQueryService {
 	@Autowired
 	@Qualifier("PrivateQueryRequest")
 	private IGeneralRequest privateQueryRequest;
+
+	@Autowired
+	private IResponseRepository responseRepository;
 	
 	@Autowired
-	private RequestService builder;
+	private RequestService requestService;
 
 	public <T extends PrivateQueryGenericResponse> T privateQuery(String resource, Class<T> type) {
 		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();
 
 		String completeURL = privateQueryRequest.getBaseURL() + resource;
-		ResponseEntity<T> response = builder.executeRequest(completeURL, HttpMethod.GET,
+		ResponseEntity<T> response = requestService.executeRequest(completeURL, HttpMethod.GET,
 				type,
 				privateQueryHeader.buildHeader(createHeader(authResponse.getBody())));
 		
@@ -72,9 +67,20 @@ public class PrivateQueryService {
 		
 		return queryGenericResponse;
 	}
+
+	public Response privateQueryAsString(String resource) {
+		ResponseEntity<AuthResponse> authResponse = serproAuthService.getAuthentication();
+
+		String completeURL = privateQueryRequest.getBaseURL() + resource;
+		ResponseEntity<String> response = requestService.executeRequest(completeURL, HttpMethod.GET,
+				String.class,
+				privateQueryHeader.buildHeader(createHeader(authResponse.getBody())));
+
+		return responseRepository.save(new Response(response.getBody()));
+	}
 	
 	public List<RequestParameter> createHeader(AuthResponse resp) {
-		List<RequestParameter> params = new ArrayList<RequestParameter>();
+		List<RequestParameter> params = new ArrayList<>();
 		params.add(new RequestParameter(HttpHeaders.AUTHORIZATION, resp.getTokenType() + " " + resp.getAccessToken()));
 		params.add(new RequestParameter("jwt_token", resp.getJwtToken()));
 		return params;

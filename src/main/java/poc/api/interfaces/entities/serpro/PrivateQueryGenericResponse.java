@@ -25,5 +25,5 @@ public class PrivateQueryGenericResponse implements Serializable{
 
 	@Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	private Long numero;
+
 }
